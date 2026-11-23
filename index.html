@@ -5,10 +5,27 @@
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 20% 0,#382237,transparent 55%) var(--bg);color:var(--ink);font:1rem/1.55 system-ui,sans-serif;min-height:100vh}main{max-width:1040px;margin:auto;padding:38px 22px 80px}h1,h2,h3{line-height:1.12;margin:.2em 0 .45em}h1,h2{font-family:Georgia,serif;font-weight:normal}h1{font-size:clamp(3.2rem,9vw,6.4rem);letter-spacing:-.065em}h2{font-size:clamp(2rem,5vw,3rem)}p{margin:.5em 0 1em;color:var(--muted)}header{padding:25px 0 15px}.eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;color:var(--rose);font-weight:700}.actions a{color:var(--mint);padding:10px 0}.nav,.actions,.stats{display:flex;gap:10px;flex-wrap:wrap}.nav{margin:12px 0 25px}.panel,article{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(15px,3vw,28px);margin-bottom:14px}article{background:#1b1620;padding:16px;margin:12px 0}button,select,input,textarea{font:inherit;color:inherit;background:#19141c;border:1px solid #715774;border-radius:9px;padding:10px 12px;min-height:44px}input,select,textarea{font-size:16px}button{cursor:pointer;font-weight:650}button:hover{border-color:var(--rose)}button.primary,button[aria-pressed="true"],button[aria-current="page"]{background:var(--rose);color:#2a1420;border-color:var(--rose)}:focus-visible{outline:3px solid var(--mint);outline-offset:3px}label{display:block;font-size:.92rem;color:var(--muted)}label :is(select,input,textarea){display:block;width:100%;margin-top:4px}textarea{min-height:85px;resize:vertical}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));gap:12px}.gap{margin:16px 0}.wrap{overflow-wrap:anywhere}.note{white-space:pre-wrap}.pill{display:inline-block;padding:4px 9px;border-radius:20px;background:#392c40;color:var(--mint);font-size:.88rem}.boundary{color:var(--rose)}progress{width:100%;accent-color:var(--rose);height:12px}.stat{flex:1 1 125px;padding:10px;background:#19141c;border-radius:10px}.stat strong{display:block;font-size:1.5rem;color:var(--mint)}small{color:var(--muted)}details{margin-top:12px}summary{cursor:pointer;color:var(--rose)}[hidden]{display:none!important}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}@media print{body{background:white;color:black}p,label,small,.pill,.boundary{color:black}button,.nav,header,.controls,progress{display:none!important}.panel,article,.stat{background:white;border-color:#aaa}article{break-inside:avoid}}
 
 .wizard{max-width:690px;margin-inline:auto}.choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.choices label{display:flex;align-items:center;gap:9px;min-height:48px;border:1px solid #715774;border-radius:9px;padding:8px 10px;color:var(--ink);cursor:pointer}.choices label:has(input:checked){background:#462a40;border-color:var(--rose)}.choices input[type=radio]{margin:0;min-height:auto;width:auto;accent-color:var(--rose)}.wizard fieldset{border:0;padding:0;margin:14px 0;min-width:0}.wizard legend{padding:0;color:var(--muted);margin-bottom:8px}.bank button{margin:4px 4px 4px 0}.wizard progress{display:block}.stack{display:grid;gap:8px;margin:12px 0}.stack button{text-align:left}@media(max-width:520px){.choices{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media screen{
+html,body{margin:0;height:100%;overflow:hidden;min-height:0}
+main{height:var(--visible,100dvh);max-width:850px;display:flex;flex-direction:column;gap:5px;padding:5px max(10px,env(safe-area-inset-right)) max(4px,env(safe-area-inset-bottom));box-sizing:border-box}
+header{padding:0}header .eyebrow,header p{display:none}header h1{font-size:1.7rem;margin:0}
+nav.nav{margin:0;display:grid;grid-template-columns:repeat(4,1fr);gap:3px}nav button{padding:3px;font-size:.87rem;min-width:0}
+#window{flex:1;min-height:0;overflow:hidden;position:relative}
+#sheets{height:100%;column-count:1;column-gap:16px;column-fill:auto;overflow:visible}
+#screen,.panel,.wizard,article,details,fieldset,#rows{break-inside:auto}
+.panel,article{padding:6px;border:0;margin:0 0 5px;border-radius:4px;max-width:none}
+#screen .grid,#screen .stats,#screen .stack{display:block}
+#screen .actions{display:block}#screen .actions button{margin:2px}
+label,button,input,textarea,summary,.stat,.pill,h2,h3,progress{break-inside:avoid;max-width:100%}
+.grid label{margin:4px 0}.choices{display:block;columns:auto}.choices label{display:inline-flex;vertical-align:top;min-height:44px;width:calc(50% - 4px);margin:2px;padding:4px 7px;line-height:1.15}
+.wizard fieldset{display:contents}.wizard legend{display:block}.wizard h2,h2{font-size:1.55rem}.gap,p{margin:5px 0}.stack button{display:block;width:100%}.stat{display:inline-block;margin:2px}.note{overflow-wrap:anywhere}textarea{height:4em;min-height:44px}
+#pager{display:flex;align-items:center;justify-content:space-between;gap:3px}#pager button{font-size:.86rem;padding:5px}#sheetCount{font-variant-numeric:tabular-nums}#message:not(:empty){padding:5px}
+@media(max-height:500px){header{display:none}nav button,#pager button{min-height:32px}}
+} @media print{#pager{display:none}}
 </style>
 <main><noscript><p>This app needs JavaScript. If you are previewing the file in Files on an iPhone or iPad, open the web version in Safari.</p></noscript><header><div class="eyebrow">A private questionnaire for two</div><h1>Between Us</h1><p>Explore desire, power, trust and limits. Answer independently and compare when you’re both ready.</p></header>
 <nav class="nav" aria-label="App views"><button data-view="start">Start</button><button data-view="survey">Questionnaire</button><button data-view="review">My results</button><button data-view="compare">Compare</button></nav>
-<div id="message" role="status"></div><section id="screen"></section></main>
+<div id="window"><div id="sheets"><div id="message" role="status"></div><section id="screen"></section></div></div><footer id="pager"><button id="prevSheet">Previous screen</button><span id="sheetCount" aria-live="polite"></span><button id="nextSheet">Next screen</button></footer></main>
 <script>
 'use strict';
 const sections = [
@@ -429,6 +446,7 @@ function render(){
  document.querySelectorAll('.nav button').forEach(b=>{if(b.dataset.view===page)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
  $('#screen').innerHTML=({start:renderStart,survey:renderSurvey,review:renderReview,compare:renderCompare}[page])();
  message(status);
+ sheet=0;requestAnimationFrame(layoutSheets);
 }
 let exportUrl;
 function download(name,type,content){
@@ -476,7 +494,7 @@ function csv(){
  compareRows().forEach(r=>data.push([r.section,r.label,r.group,...values(r.a),...values(r.b)]));
  return '\uFEFF'+data.map(row=>row.map(csvCell).join(',')).join('\r\n');
 }
-function focusSection(){const title=$('#section-title');title?.focus();title?.scrollIntoView({block:'start'})}
+function focusSection(){document.activeElement?.blur()}
 document.addEventListener('click',event=>{
  const b=event.target.closest('button');if(!b)return;
  if(b.dataset.view){if(page==='start'&&b.dataset.view==='survey')route='core';page=b.dataset.view;status='';render();if(page==='survey')focusSection();return}
@@ -530,6 +548,29 @@ document.addEventListener('change',async event=>{
    status='Responses loaded.';render();
   }catch(error){el.value='';message(error instanceof SyntaxError?'This file is not valid JSON.':error.message)}
  }
+});
+let sheet=0;
+const viewport=$('#window');
+function layoutSheets(){
+ const visual=window.visualViewport;
+ document.documentElement.style.setProperty('--visible',(visual?visual.height:window.innerHeight)+'px');
+ const step=viewport.clientWidth+16;
+ const count=Math.max(1,Math.ceil((viewport.scrollWidth-viewport.clientWidth-1)/step)+1);
+ sheet=Math.max(0,Math.min(sheet,count-1));
+ viewport.scrollLeft=sheet*step;
+ $('#prevSheet').disabled=sheet===0;
+ $('#nextSheet').disabled=sheet===count-1;
+ $('#sheetCount').textContent=(sheet+1)+' / '+count;
+}
+$('#prevSheet').onclick=()=>{sheet--;layoutSheets()};
+$('#nextSheet').onclick=()=>{sheet++;layoutSheets()};
+window.addEventListener('resize',layoutSheets);
+window.visualViewport?.addEventListener('resize',layoutSheets);
+new MutationObserver(()=>requestAnimationFrame(layoutSheets)).observe($('#sheets'),{subtree:true,childList:true,attributes:true,attributeFilter:['open']});
+viewport.addEventListener('focusin',event=>{
+ const offset=event.target.getBoundingClientRect().left-viewport.getBoundingClientRect().left+viewport.scrollLeft;
+ sheet=Math.max(0,Math.floor((offset+1)/(viewport.clientWidth+16)));
+ requestAnimationFrame(layoutSheets);
 });
 render();
 </script></html>

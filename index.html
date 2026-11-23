@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en-GB"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Between Us</title>
+<style>
+:root{color-scheme:dark;--bg:#141118;--panel:#211b27;--line:#46354c;--ink:#fff4f7;--muted:#d2bfce;--rose:#ffa7bb;--mint:#b4e9cf}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 20% 0,#382237,transparent 55%) var(--bg);color:var(--ink);font:1rem/1.55 system-ui,sans-serif;min-height:100vh}main{max-width:1040px;margin:auto;padding:38px 22px 80px}h1,h2,h3{line-height:1.12;margin:.2em 0 .45em}h1,h2{font-family:Georgia,serif;font-weight:normal}h1{font-size:clamp(3.2rem,9vw,6.4rem);letter-spacing:-.065em}h2{font-size:clamp(2rem,5vw,3rem)}p{margin:.5em 0 1em;color:var(--muted)}header{padding:25px 0 15px}.eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;color:var(--rose);font-weight:700}.actions a{color:var(--mint);padding:10px 0}.nav,.actions,.stats{display:flex;gap:10px;flex-wrap:wrap}.nav{margin:12px 0 25px}.panel,article{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(15px,3vw,28px);margin-bottom:14px}article{background:#1b1620;padding:16px;margin:12px 0}button,select,input,textarea{font:inherit;color:inherit;background:#19141c;border:1px solid #715774;border-radius:9px;padding:10px 12px;min-height:44px}input,select,textarea{font-size:16px}button{cursor:pointer;font-weight:650}button:hover{border-color:var(--rose)}button.primary,button[aria-current="page"]{background:var(--rose);color:#2a1420;border-color:var(--rose)}:focus-visible{outline:3px solid var(--mint);outline-offset:3px}label{display:block;font-size:.92rem;color:var(--muted)}label :is(select,input,textarea){display:block;width:100%;margin-top:4px}textarea{min-height:85px;resize:vertical}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));gap:12px}.gap{margin:16px 0}.wrap{overflow-wrap:anywhere}.note{white-space:pre-wrap}.pill{display:inline-block;padding:4px 9px;border-radius:20px;background:#392c40;color:var(--mint);font-size:.88rem}.boundary{color:var(--rose)}progress{width:100%;accent-color:var(--rose);height:12px}.stat{flex:1 1 125px;padding:10px;background:#19141c;border-radius:10px}.stat strong{display:block;font-size:1.5rem;color:var(--mint)}small{color:var(--muted)}details{margin-top:12px}summary{cursor:pointer;color:var(--rose)}[hidden]{display:none!important}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}@media print{body{background:white;color:black}p,label,small,.pill,.boundary{color:black}button,.nav,header,.controls,progress{display:none!important}.panel,article,.stat{background:white;border-color:#aaa}article{break-inside:avoid}}
+</style>
+<main><noscript><p>This app needs JavaScript. If you are previewing the file in Files on an iPhone or iPad, open the web version in Safari.</p></noscript><header><div class="eyebrow">A private questionnaire for two</div><h1>Between Us</h1><p>Explore desire, power, trust and limits. Answer independently and compare when you’re both ready.</p></header>
+<nav class="nav" aria-label="App views"><button data-view="start">Start</button><button data-view="survey">Questionnaire</button><button data-view="review">My results</button><button data-view="compare">Compare</button></nav>
+<div id="message" role="status"></div><section id="screen"></section></main>
+<script>
+'use strict';
+const sections = [
+ ['Desire & initiation','Affection without escalation|Being actively pursued|Taking the initiative|Planned intimacy|Spontaneous intimacy|Flirting during the day|Direct invitations|Indirect signals|Slow build-up|Mutual reassurance after a no|Affection on low-energy days|Solo time and privacy'],
+ ['Everyday D/s','One partner taking the lead at home|Switching who leads|Agreed decisions delegated to one partner|Acts of service|Small daily rituals|Private titles or honorifics|Discreet signals around others|Clothing choices guided by a partner|Praise and approval|Playful rules|Accountability or agreed consequences|Time-limited power exchange|Long-running power exchange|Keeping roles out of disagreements|Taking the lead during a date|Receiving acts of service'],
+ ['Roles & scene dynamics','Taking charge in a scene|Following a partner’s lead in a scene|Switching roles within a scene|Giving instructions|Receiving instructions|Permission and anticipation|Praise kink|Brat play|Worship and devotion|Service-oriented submission|Sensation-focused scenes|Ritualised scenes|Scripted resistance or consensual non-consent themes|Fantasy punishment|Role reversal|Scene without sexual contact'],
+ ['Language & emotional intensity','Giving playful teasing|Receiving playful teasing|Giving humiliation or degradation|Receiving humiliation or degradation|Pet names|Explicit language|Formal tone|Warm authority|Stern authority|Being put on the spot|Body-focused compliments|Body-focused teasing|Private affirmations after a scene|Words or topics that are off limits'],
+ ['Clothing, aesthetics & fetish','Nylons or tights|Stockings or hold-ups|Heels or platform boots|Lingerie|Leather or latex aesthetic|Uniforms or costumes|Cosplay|Being dressed up for|Dressing up for a partner|Make-up or styling|Specific textures and fabrics|Masks|Collars or symbolic jewellery|Gloves|Clothing that signals roles discreetly'],
+ ['Touch, restraint & sensation','Soft touch|Firm touch|Blindfolds|Sound restriction|Cuffs or soft restraints|Rope bondage|Giving impact play|Receiving impact play|Sensation contrast|Temperature play|Light scratching or biting|Visible marks|Intense sensation|Immobilisation themes|Breath or neck pressure as a hard-limit check','For higher-risk topics, record the boundary or fantasy status. This questionnaire gives no techniques.'],
+ ['Sexual preferences','Kissing and making out|Giving oral sex|Receiving oral sex|Manual stimulation|Vaginal penetration|Anal play or penetration|Using toys together|Partner-controlled toys|Mutual masturbation|Watching a partner solo|Orgasm control themes|Extended build-up|Rougher intensity|Gentle intimacy|Intimacy without an orgasm goal|Changing who leads during sex|Barrier preferences|Contraception conversations'],
+ ['Fantasy & roleplay','Strangers meeting for the first time|Character-based roleplay|Formal authority roleplay|Playful rivalry|A partner dressing to surprise me|Tease and denial themes|Objectification themes|Pet play themes|Being watched as a fantasy|Watching as a fantasy|Sharing fantasies in writing|Hearing a partner’s fantasies|Acting out a pre-agreed scene|Keeping a fantasy imaginary|Inventing a fictional scenario together'],
+ ['Privacy & other people','Private photos|Private video|Intimate messages|Remote intimacy|Agreeing how media is stored or deleted|Discreet playfulness outside home|Kink community events|Talking to friends about the dynamic|Watching adult material together|Discussing attraction to other people|Fantasy involving another adult|Real-life involvement of another adult|Exclusivity agreement|Keeping family spaces and routines separate'],
+ ['Consent & hard boundaries','Explicit yes before starting|Opt-in for a new activity|Spoken pause word|Non-verbal pause signal|Checking in during a scene|Written discussion before a scene|Calling it off without explanation|No role-play during conflict|No participation when impaired|No surprise escalation|No marks where visible|Limits around names, insults or body comments|Limits around pain or intensity|Health and sensory limits|Pregnancy and STI precautions|No sharing recordings or screenshots without current permission'],
+ ['Aftercare & repair','Quiet physical closeness|Space alone|Water, warmth or a snack|Reassurance and praise|Gentle humour|Checking in the next morning|Written debrief|Talking through something that landed badly|An agreed end-of-scene ritual|Support if one partner freezes or shuts down|Pausing roles on difficult days|Revisiting agreements when capacity changes|Making a clear repair after a boundary error'],
+ ['Priorities & pace','More romance|More everyday affection|More confident leadership|Feeling desired|Feeling appreciated|More variety|More predictability|More time to build anticipation|More time to talk beforehand|Keeping intensity occasional|Starting with existing favourites|Trying one new thing at a time|Regular relationship check-ins|Keeping the dynamic optional on busy days']
+].map(([name,list,help],index)=>({name,help,items:list.split('|').map((label,i)=>({id:index+'-'+i,label}))}));
+const reflection = ['What do I most want more of?','What is firmly off the table?','What would make a conditional yes feel comfortable?','What fantasy would I like to talk about, even if it stays imaginary?','What helps me feel wanted, safe and able to say no?','What do I want us to try, revisit or retire?'];
+const interest=['Love it','Want it','Curious','Depends / soft limit','Unsure','Fantasy only','Dislike / no','Hard limit','Prefer not to answer'];
+const history=['Never explored','Fantasy only so far','Discussed only','Tried together','Tried elsewhere','Tried together and elsewhere','Prefer not to answer'];
+const priority=['Low','Medium','High','Essential'];
+const items=sections.flatMap(s=>s.items);
+const blank=()=>({name:'',answers:{},reflections:{},section:0});
+const key='between-us-v1';
+let state=blank(), remembering=false, page='start', peer=null, filter='All topics', search='', status='';
+try{const stored=localStorage.getItem(key);if(stored){state={...blank(),...parse(JSON.parse(stored))};remembering=true}}catch{}
+const $=s=>document.querySelector(s);
+const escapeHtml=(str='')=>String(str).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const opt=(values,value,placeholder)=>'<option value="">'+placeholder+'</option>'+values.map(v=>'<option'+(v===value?' selected':'')+'>'+v+'</option>').join('');
+const choice=(label,field,values,a)=>'<label>'+label+'<select data-field="'+field+'">'+opt(values,a[field],'Choose…')+'</select></label>';
+const valid=(value,values)=>values.includes(value)?value:'';
+function parse(raw){
+ if(!raw||raw.format!=='between-us'||raw.version!==1||!raw.answers||typeof raw.answers!=='object'||Array.isArray(raw.answers))throw Error('Select a Between Us response JSON file, version 1.');
+ const answers={};
+ for(const {id} of items){
+  const a=Object.prototype.hasOwnProperty.call(raw.answers,id)&&raw.answers[id];
+  if(!a||typeof a!=='object')continue;
+  answers[id]={interest:valid(a.interest,interest),history:valid(a.history,history),priority:valid(a.priority,priority),note:typeof a.note==='string'?a.note.slice(0,3000):''};
+ }
+ const reflections={};
+ reflection.forEach((_,i)=>{const v=raw.reflections?.[i];if(typeof v==='string')reflections[i]=v.slice(0,3000)});
+ return {name:typeof raw.name==='string'?raw.name.slice(0,60):'',answers,reflections,section:Number.isInteger(raw.section)&&raw.section>=0&&raw.section<=sections.length?raw.section:0};
+}
+function packet(notes=true){
+ const answers={};
+ for(const [id,a] of Object.entries(state.answers)){
+  if(a.interest==='Prefer not to answer')continue;
+  answers[id]={...a,note:notes?a.note||'':''};
+ }
+ return {format:'between-us',version:1,date:new Date().toISOString(),name:state.name,section:state.section,answers,reflections:notes?state.reflections:{}};
+}
+function persist(){
+ if(!remembering)return;
+ try{localStorage.setItem(key,JSON.stringify({...packet(),answers:state.answers}))}
+ catch{remembering=false;message('Draft storage is unavailable. Export your answers before closing.')}
+}
+function message(value){status=value;$('#message').textContent=value}
+const marked=a=>Boolean(a?.interest&&a.interest!=='Prefer not to answer');
+const yes=a=>['Love it','Want it'].includes(a?.interest);
+const rules={
+ 'Hard boundary':'At least one hard limit. Treat it as off the table.',
+ 'No / dislike':'At least one person has said no. Respect that answer.',
+ 'Fantasy only':'At least one person wants to keep this imaginary. Discuss sharing the fantasy only if you both want to.',
+ 'Conditions to discuss':'Agree the conditions and pace before making plans.',
+ 'Shared enthusiasm':'Both actively want this. Confirm the scope and check in on the day.',
+ 'Shared curiosity':'Both express interest, with at least one curious. Talk through a low-pressure first step.',
+ 'Different pace / unsure':'At least one person is unsure. Give them room to decide.',
+ 'Missing answer':'One or both people skipped this or left it blank.'
+};
+function classify(a,b){
+ const pair=[a?.interest,b?.interest];
+ if(pair.includes('Hard limit'))return 'Hard boundary';
+ if(pair.includes('Dislike / no'))return 'No / dislike';
+ if(pair.includes('Fantasy only'))return 'Fantasy only';
+ if(pair.includes('Depends / soft limit'))return 'Conditions to discuss';
+ if(!marked(a)||!marked(b))return 'Missing answer';
+ if(yes(a)&&yes(b))return 'Shared enthusiasm';
+ if(pair.includes('Unsure'))return 'Different pace / unsure';
+ return 'Shared curiosity';
+}
+const answered=s=>items.filter(({id})=>marked(s.answers[id])).length;
+const high=a=>['High','Essential'].includes(a?.priority);
+function renderStart(){
+ return '<div class="panel"><h2>Make your own copy</h2><p>Use separate devices or browser profiles if you want to keep drafts apart. By default answers live in this open tab. You can opt into a saved browser draft below.</p><div class="grid gap"><label>Your name or alias<input id="name" maxlength="60" value="'+escapeHtml(state.name)+'"></label><label>Resume the same profile later<input id="own" type="file" accept=".json,application/json"></label></div><label style="display:flex;align-items:center;gap:10px"><input id="remember" type="checkbox" style="min-height:auto;width:auto;margin:0" '+(remembering?'checked':'')+'> Remember my draft in this browser</label><div class="actions gap"><button class="primary" data-view="survey">'+(answered(state)?'Continue questionnaire':'Start questionnaire')+'</button><button data-view="compare">Compare existing exports</button></div><details><summary>Privacy and sharing</summary><p>Answers are processed in your browser. Downloads are ordinary, readable files. A saved browser draft is visible to anyone using that browser profile. Only exchange exports you choose to share. The initial results export excludes free-text by default.</p><button id="clear">Clear local answers</button></details></div>';
+}
+function renderSurvey(){
+ const s=sections[state.section];
+ return '<div class="panel"><div class="eyebrow">Questionnaire</div><h2 id="section-title" tabindex="-1">'+(s?.name||'In your own words')+'</h2><p id="count">'+answered(state)+' of '+items.length+' topics answered</p><progress aria-label="Topics answered" id="progress" max="'+items.length+'" value="'+answered(state)+'"></progress><label class="gap">Jump to section<select id="jump">'+[...sections.map(x=>x.name),'In your own words'].map((name,i)=>'<option value="'+i+'" '+(i===state.section?'selected':'')+'>'+name+'</option>').join('')+'</select></label><p>'+(s?.help|| (s?'Answer only what you want to. Experience and current interest are separate. Add conditions, preferred roles or context in notes.':'Use these optional prompts for anything the checklist missed.'))+'</p>'+
+ (s?s.items.map(({id,label})=>{const a=state.answers[id]||{};return '<article data-id="'+id+'"><h3>'+label+'</h3><div class="grid">'+choice('Interest or limit','interest',interest,a)+choice('Experience','history',history,a)+choice('Importance','priority',priority,a)+'</div><details '+(a.note?'open':'')+'><summary>Conditions or notes</summary><label class="sr">Notes for '+label+'</label><textarea aria-label="Notes for '+label+'" data-field="note" maxlength="3000" placeholder="For example, only in private or only with a clear pause signal.">'+escapeHtml(a.note)+'</textarea></details></article>'}).join(''):
+ reflection.map((q,i)=>'<label class="gap">'+q+'<textarea maxlength="3000" data-reflection="'+i+'">'+escapeHtml(state.reflections[i])+'</textarea></label>').join(''))+
+ '<div class="actions gap"><button data-step="-1" '+(!state.section?'disabled':'')+'>Previous section</button>'+(s?'<button class="primary" data-step="1">Next section</button>':'<button class="primary" data-view="review">See my results</button>')+'</div></div>';
+}
+function summary(s){
+ const a=Object.values(s.answers).filter(marked);
+ const groups=[
+ ['Answered',a.length],['Want or love',a.filter(yes).length],['Curious',a.filter(x=>x.interest==='Curious').length],
+ ['Conditional',a.filter(x=>x.interest==='Depends / soft limit').length],['Fantasy only',a.filter(x=>x.interest==='Fantasy only').length],['Hard limits',a.filter(x=>x.interest==='Hard limit').length]
+ ];
+ return '<div class="stats gap">'+groups.map(([label,n])=>'<div class="stat"><strong>'+n+'</strong>'+label+'</div>').join('')+'</div>';
+}
+function formatted(a,notes=true){
+ if(!a||a.interest==='Prefer not to answer')return '<small>No shared answer</small>';
+ return '<span class="pill">'+escapeHtml(a.interest||'Interest unanswered')+'</span>'+ (a.history?'<div><small>'+escapeHtml(a.history)+'</small></div>':'')+(a.priority?'<div><small>Importance: '+escapeHtml(a.priority)+'</small></div>':'')+(notes&&a.note?'<p class="note wrap">'+escapeHtml(a.note)+'</p>':'');
+}
+function reflections(s){return reflection.map((q,i)=>s.reflections[i]?.trim()?'<article><h3>'+q+'</h3><p class="note wrap">'+escapeHtml(s.reflections[i])+'</p></article>':'').join('')}
+function renderReview(){
+ const ranked=sections.map(s=>[s.name,s.items.filter(x=>yes(state.answers[x.id])).length]).filter(x=>x[1]).sort((a,b)=>b[1]-a[1]);
+ const priorityItems=items.filter(x=>high(state.answers[x.id])&&yes(state.answers[x.id]));
+ const boundaries=items.filter(x=>['Hard limit','Dislike / no','Depends / soft limit','Fantasy only'].includes(state.answers[x.id]?.interest));
+ const unexplored=items.filter(x=>['Never explored','Discussed only','Fantasy only so far'].includes(state.answers[x.id]?.history)&&(yes(state.answers[x.id])||state.answers[x.id]?.interest==='Curious'));
+ function listing(title,rows){return rows.length?'<details open><summary>'+title+' ('+rows.length+')</summary>'+rows.map(x=>'<article><h3>'+x.label+'</h3>'+formatted(state.answers[x.id])+'</article>').join('')+'</details>':''}
+ return '<div class="panel"><h2>My results</h2>'+summary(state)+(ranked.length?'<p>Your strongest areas by number of positive answers: '+ranked.slice(0,3).map(x=>x[0]+' ('+x[1]+')').join(', ')+'.</p>':'<p>Mark topics you want or love to see your strongest areas here.</p>')+
+ '<div class="controls"><label><input type="checkbox" id="notes" style="min-height:auto;width:auto;display:inline"> Include free-text notes and reflections in JSON</label><div class="actions gap"><button id="export" class="primary">Export responses (JSON)</button><button id="print">Print or save PDF</button></div></div>'+
+ listing('High-priority interests',priorityItems)+listing('Boundaries and fantasy-only topics',boundaries)+listing('Interests you have yet to try',unexplored)+
+ sections.map(s=>listing(s.name,s.items.filter(x=>{const a=state.answers[x.id];return a&&a.interest!=='Prefer not to answer'&&Object.values(a).some(Boolean)}))).join('')+reflections(state)+'</div>';
+}
+const complements = [
+ ['Being actively pursued','Taking the initiative'],
+ ['Acts of service','Receiving acts of service'],
+ ['Taking charge in a scene','Following a partner’s lead in a scene'],
+ ['Giving instructions','Receiving instructions'],
+ ['Giving playful teasing','Receiving playful teasing'],
+ ['Giving humiliation or degradation','Receiving humiliation or degradation'],
+ ['Being dressed up for','Dressing up for a partner'],
+ ['Giving impact play','Receiving impact play'],
+ ['Giving oral sex','Receiving oral sex'],
+ ['Being watched as a fantasy','Watching as a fantasy'],
+ ['Sharing fantasies in writing','Hearing a partner’s fantasies']
+];
+const partners=new Map(complements.flatMap(([a,b])=>[[a,b],[b,a]]));
+const byLabel=new Map(items.map(x=>[x.label,x]));
+function compareRows(){
+ return sections.flatMap(s=>s.items.map(item=>{
+  const partnerLabel=partners.get(item.label);
+  const a=state.answers[item.id];
+  const b=peer.answers[partnerLabel?byLabel.get(partnerLabel).id:item.id];
+  return {...item,label:partnerLabel?item.label+' / partner: '+partnerLabel:item.label,section:s.name,a,b,group:classify(a,b)};
+ }));
+}
+function compared(rows){
+ const matches=rows.filter(r=>(filter==='All topics'||r.group===filter)&&(!search||(r.label+' '+r.section).toLowerCase().includes(search.toLowerCase())));
+ const orders=Object.keys(rules);
+ matches.sort((a,b)=>orders.indexOf(a.group)-orders.indexOf(b.group)||Number(high(b.a)||high(b.b))-Number(high(a.a)||high(a.b)));
+ return matches.map(r=>'<article><small>'+r.section+'</small><h3>'+r.label+'</h3><span class="pill '+(['Hard boundary','No / dislike'].includes(r.group)?'boundary':'')+'">'+r.group+'</span><p>'+rules[r.group]+'</p><div class="grid"><div><strong class="wrap">'+escapeHtml(state.name||'My answers')+'</strong><br>'+formatted(r.a)+'</div><div><strong class="wrap">'+escapeHtml(peer.name||'Partner')+'</strong><br>'+formatted(r.b)+'</div></div></article>').join('')||'<p>No topics match this filter.</p>';
+}
+function renderCompare(){
+ const rows=peer?compareRows():[];
+ const groups=Object.keys(rules);
+ const shortlist=rows.filter(r=>r.group==='Shared enthusiasm'&&(high(r.a)||high(r.b))).slice(0,5);
+ const needs=rows.filter(r=>['Hard boundary','No / dislike'].includes(r.group)&&(yes(r.a)||yes(r.b))).length;
+ const matchedNew=rows.filter(r=>r.group==='Shared enthusiasm'&&[r.a.history,r.b.history].some(x=>['Never explored','Discussed only','Fantasy only so far'].includes(x))&&!([r.a.history,r.b.history].some(x=>x?.startsWith('Tried together'))));
+ return '<div class="panel"><h2>Compare responses</h2><p>Load each person’s export, or keep your current draft and load only your partner’s file. Imported partner answers stay in this tab.</p><div class="grid controls"><label>Load my responses<input id="own" type="file" accept=".json,application/json"></label><label>Load partner responses<input id="peer" type="file" accept=".json,application/json"></label></div><p>'+answered(state)+' topics in your responses'+(peer?' · '+answered(peer)+' in partner responses':'')+'</p>'+
+ (peer?'<div class="stats gap">'+groups.map(g=>'<div class="stat"><strong>'+rows.filter(r=>r.group===g).length+'</strong>'+g+'</div>').join('')+'</div>'+
+ (shortlist.length?'<p>Shared favourites to discuss first: '+shortlist.map(r=>r.label).join(', ')+'.</p>':'')+
+ (matchedNew.length?'<p>Potential firsts together: '+matchedNew.slice(0,5).map(r=>r.label).join(', ')+'.</p>':'')+
+ (needs?'<p>'+needs+' topics pair an active interest with a no or hard limit. Keep those off the table.</p>':'')+
+ '<p>Matching roles are paired where possible, such as giving instructions with receiving them. Each new activity still needs a current, freely given yes.</p><div class="grid controls gap"><label>Filter results<select id="filter"><option>All topics</option>'+groups.map(g=>'<option '+(g===filter?'selected':'')+'>'+g+'</option>').join('')+'</select></label><label>Search topics<input id="search" value="'+escapeHtml(search)+'"></label></div><div class="actions controls gap"><button id="compareExport">Export full comparison (CSV)</button><button id="print">Print or save filtered PDF</button><button id="removePeer">Remove partner responses</button></div><div id="rows">'+compared(rows)+'</div>'+
+ (reflections(state)||reflections(peer)?'<details><summary>Shared free-text reflections</summary><h3 class="wrap">'+escapeHtml(state.name||'My answers')+'</h3>'+reflections(state)+'<h3 class="wrap">'+escapeHtml(peer.name||'Partner')+'</h3>'+reflections(peer)+'</details>':''):'')+'</div>';
+}
+function render(){
+ document.querySelectorAll('.nav button').forEach(b=>{if(b.dataset.view===page)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+ $('#screen').innerHTML=({start:renderStart,survey:renderSurvey,review:renderReview,compare:renderCompare}[page])();
+ message(status);
+}
+let exportUrl;
+function download(name,type,content){
+ if(exportUrl)URL.revokeObjectURL(exportUrl);
+ const file=new Blob([content],{type});
+ const url=URL.createObjectURL(file);
+ exportUrl=url;
+ const links=document.createElement('div');
+ links.className='actions gap';
+ const link=document.createElement('a');
+ link.href=url;link.download=name;link.textContent='Download '+name;
+ links.append(link);
+ const preview=document.createElement('a');
+ preview.href=url;preview.target='_blank';preview.rel='noopener';
+ preview.textContent='Open file to save or share';
+ links.append(preview);
+ if(typeof File==='function'&&typeof navigator.canShare==='function'&&typeof navigator.share==='function'){
+  const attachment=new File([file],name,{type:type.split(';')[0]});
+  if(navigator.canShare({files:[attachment]})){
+   const share=document.createElement('button');
+   share.textContent='Share or Save to Files';
+   share.addEventListener('click',async()=>{
+    try{await navigator.share({files:[attachment]})}
+    catch(error){if(error.name!=='AbortError')message('Sharing was unavailable. Use the download link instead.')}
+   });
+   links.append(share);
+  }
+ }
+ message('Your export is ready. On iPhone or iPad, choose Share or Save to Files if available.');
+ $('#message').append(links);
+ links.firstElementChild.focus();
+}
+function readFile(file){
+ return new Promise((resolve,reject)=>{
+  const reader=new FileReader();
+  reader.onload=()=>resolve(reader.result);
+  reader.onerror=()=>reject(Error('This file could not be read. Save it to Files and select it again.'));
+  reader.readAsText(file);
+ });
+}
+const csvCell=x=>'"'+String(x??'').replace(/^[\s\uFEFF]*[=+@-]|^[\t\r\n]/,m=>"'"+m).replace(/"/g,'""')+'"';
+function csv(){
+ const data=[['Section','Topic','Outcome','My interest','My experience','My importance','Partner interest','Partner experience','Partner importance']];
+ const values=a=>!a||a.interest==='Prefer not to answer'?['','','']:[a.interest,a.history,a.priority];
+ compareRows().forEach(r=>data.push([r.section,r.label,r.group,...values(r.a),...values(r.b)]));
+ return '\uFEFF'+data.map(row=>row.map(csvCell).join(',')).join('\r\n');
+}
+function focusSection(){const title=$('#section-title');title?.focus();title?.scrollIntoView({block:'start'})}
+document.addEventListener('click',event=>{
+ const b=event.target.closest('button');if(!b)return;
+ if(b.dataset.view){page=b.dataset.view;status='';render();if(page==='survey')focusSection();return}
+ if(b.dataset.step){state.section=Number(state.section)+Number(b.dataset.step);persist();render();focusSection();return}
+ if(b.id==='export'){download('between-us-responses.json','application/json',JSON.stringify(packet($('#notes').checked),null,2));}
+ if(b.id==='compareExport'){download('between-us-comparison.csv','text/csv;charset=utf-8',csv());}
+ if(b.id==='print')window.print();
+ if(b.id==='removePeer'){peer=null;filter='All topics';search='';render()}
+ if(b.id==='clear'&&confirm('Clear the answers and draft from this browser? Your downloaded exports will still exist.')){
+  try{localStorage.removeItem(key)}catch{}remembering=false;state=blank();peer=null;filter='All topics';search='';status='Local answers cleared.';render();
+ }
+});
+document.addEventListener('input',event=>{
+ const el=event.target;
+ if(el.id==='name'){state.name=el.value;persist()}
+ if(el.id==='search'){search=el.value;$('#rows').innerHTML=compared(compareRows())}
+ if(el.dataset.reflection!==undefined){state.reflections[el.dataset.reflection]=el.value;persist()}
+ if(el.dataset.field){
+  const id=el.closest('article').dataset.id;
+  (state.answers[id]??={})[el.dataset.field]=el.value;
+  persist();
+  $('#progress').value=answered(state);$('#count').textContent=answered(state)+' of '+items.length+' topics answered';
+ }
+});
+document.addEventListener('change',async event=>{
+ const el=event.target;
+ if(el.id==='jump'){state.section=Number(el.value);persist();render();focusSection()}
+ if(el.id==='filter'){filter=el.value;$('#rows').innerHTML=compared(compareRows())}
+ if(el.id==='remember'){
+  remembering=el.checked;
+  if(remembering){persist();el.checked=remembering}
+  else{try{localStorage.removeItem(key)}catch{}}
+ }
+ if((el.id==='own'||el.id==='peer')&&el.files?.[0]){
+  try{
+   const file=el.files[0];if(file.size>5000000)throw Error('This file is too large for a response export.');
+   const profile=parse(JSON.parse(await readFile(file)));
+   if(el.id==='own'){
+    if((Object.keys(state.answers).length||Object.keys(state.reflections).length)&&!confirm('Replace your current answers with this file?')){el.value='';return}
+    state=profile;persist();
+   }else{peer=profile;filter='All topics';search=''}
+   status='Responses loaded.';render();
+  }catch(error){el.value='';message(error instanceof SyntaxError?'This file is not valid JSON.':error.message)}
+ }
+});
+render();
+</script></html>

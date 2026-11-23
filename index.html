@@ -2,7 +2,9 @@
 <html lang="en-GB"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Between Us</title>
 <style>
 :root{color-scheme:dark;--bg:#141118;--panel:#211b27;--line:#46354c;--ink:#fff4f7;--muted:#d2bfce;--rose:#ffa7bb;--mint:#b4e9cf}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 20% 0,#382237,transparent 55%) var(--bg);color:var(--ink);font:1rem/1.55 system-ui,sans-serif;min-height:100vh}main{max-width:1040px;margin:auto;padding:38px 22px 80px}h1,h2,h3{line-height:1.12;margin:.2em 0 .45em}h1,h2{font-family:Georgia,serif;font-weight:normal}h1{font-size:clamp(3.2rem,9vw,6.4rem);letter-spacing:-.065em}h2{font-size:clamp(2rem,5vw,3rem)}p{margin:.5em 0 1em;color:var(--muted)}header{padding:25px 0 15px}.eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;color:var(--rose);font-weight:700}.actions a{color:var(--mint);padding:10px 0}.nav,.actions,.stats{display:flex;gap:10px;flex-wrap:wrap}.nav{margin:12px 0 25px}.panel,article{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(15px,3vw,28px);margin-bottom:14px}article{background:#1b1620;padding:16px;margin:12px 0}button,select,input,textarea{font:inherit;color:inherit;background:#19141c;border:1px solid #715774;border-radius:9px;padding:10px 12px;min-height:44px}input,select,textarea{font-size:16px}button{cursor:pointer;font-weight:650}button:hover{border-color:var(--rose)}button.primary,button[aria-current="page"]{background:var(--rose);color:#2a1420;border-color:var(--rose)}:focus-visible{outline:3px solid var(--mint);outline-offset:3px}label{display:block;font-size:.92rem;color:var(--muted)}label :is(select,input,textarea){display:block;width:100%;margin-top:4px}textarea{min-height:85px;resize:vertical}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));gap:12px}.gap{margin:16px 0}.wrap{overflow-wrap:anywhere}.note{white-space:pre-wrap}.pill{display:inline-block;padding:4px 9px;border-radius:20px;background:#392c40;color:var(--mint);font-size:.88rem}.boundary{color:var(--rose)}progress{width:100%;accent-color:var(--rose);height:12px}.stat{flex:1 1 125px;padding:10px;background:#19141c;border-radius:10px}.stat strong{display:block;font-size:1.5rem;color:var(--mint)}small{color:var(--muted)}details{margin-top:12px}summary{cursor:pointer;color:var(--rose)}[hidden]{display:none!important}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}@media print{body{background:white;color:black}p,label,small,.pill,.boundary{color:black}button,.nav,header,.controls,progress{display:none!important}.panel,article,.stat{background:white;border-color:#aaa}article{break-inside:avoid}}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 20% 0,#382237,transparent 55%) var(--bg);color:var(--ink);font:1rem/1.55 system-ui,sans-serif;min-height:100vh}main{max-width:1040px;margin:auto;padding:38px 22px 80px}h1,h2,h3{line-height:1.12;margin:.2em 0 .45em}h1,h2{font-family:Georgia,serif;font-weight:normal}h1{font-size:clamp(3.2rem,9vw,6.4rem);letter-spacing:-.065em}h2{font-size:clamp(2rem,5vw,3rem)}p{margin:.5em 0 1em;color:var(--muted)}header{padding:25px 0 15px}.eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;color:var(--rose);font-weight:700}.actions a{color:var(--mint);padding:10px 0}.nav,.actions,.stats{display:flex;gap:10px;flex-wrap:wrap}.nav{margin:12px 0 25px}.panel,article{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:clamp(15px,3vw,28px);margin-bottom:14px}article{background:#1b1620;padding:16px;margin:12px 0}button,select,input,textarea{font:inherit;color:inherit;background:#19141c;border:1px solid #715774;border-radius:9px;padding:10px 12px;min-height:44px}input,select,textarea{font-size:16px}button{cursor:pointer;font-weight:650}button:hover{border-color:var(--rose)}button.primary,button[aria-pressed="true"],button[aria-current="page"]{background:var(--rose);color:#2a1420;border-color:var(--rose)}:focus-visible{outline:3px solid var(--mint);outline-offset:3px}label{display:block;font-size:.92rem;color:var(--muted)}label :is(select,input,textarea){display:block;width:100%;margin-top:4px}textarea{min-height:85px;resize:vertical}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));gap:12px}.gap{margin:16px 0}.wrap{overflow-wrap:anywhere}.note{white-space:pre-wrap}.pill{display:inline-block;padding:4px 9px;border-radius:20px;background:#392c40;color:var(--mint);font-size:.88rem}.boundary{color:var(--rose)}progress{width:100%;accent-color:var(--rose);height:12px}.stat{flex:1 1 125px;padding:10px;background:#19141c;border-radius:10px}.stat strong{display:block;font-size:1.5rem;color:var(--mint)}small{color:var(--muted)}details{margin-top:12px}summary{cursor:pointer;color:var(--rose)}[hidden]{display:none!important}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}@media print{body{background:white;color:black}p,label,small,.pill,.boundary{color:black}button,.nav,header,.controls,progress{display:none!important}.panel,article,.stat{background:white;border-color:#aaa}article{break-inside:avoid}}
+
+.wizard{max-width:690px;margin-inline:auto}.choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.choices label{display:flex;align-items:center;gap:9px;min-height:48px;border:1px solid #715774;border-radius:9px;padding:8px 10px;color:var(--ink);cursor:pointer}.choices label:has(input:checked){background:#462a40;border-color:var(--rose)}.choices input[type=radio]{margin:0;min-height:auto;width:auto;accent-color:var(--rose)}.wizard fieldset{border:0;padding:0;margin:14px 0;min-width:0}.wizard legend{padding:0;color:var(--muted);margin-bottom:8px}.bank button{margin:4px 4px 4px 0}.wizard progress{display:block}.stack{display:grid;gap:8px;margin:12px 0}.stack button{text-align:left}@media(max-width:520px){.choices{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 <main><noscript><p>This app needs JavaScript. If you are previewing the file in Files on an iPhone or iPad, open the web version in Safari.</p></noscript><header><div class="eyebrow">A private questionnaire for two</div><h1>Between Us</h1><p>Explore desire, power, trust and limits. Answer independently and compare when you’re both ready.</p></header>
 <nav class="nav" aria-label="App views"><button data-view="start">Start</button><button data-view="survey">Questionnaire</button><button data-view="review">My results</button><button data-view="compare">Compare</button></nav>
@@ -28,14 +30,15 @@ const interest=['Love it','Want it','Curious','Depends / soft limit','Unsure','F
 const history=['Never explored','Fantasy only so far','Discussed only','Tried together','Tried elsewhere','Tried together and elsewhere','Prefer not to answer'];
 const priority=['Low','Medium','High','Essential'];
 const items=sections.flatMap(s=>s.items);
-const blank=()=>({name:'',answers:{},reflections:{},section:0});
+const byId=new Map(items.map(item=>[item.id,item]));
+const core='0-0 0-1 0-2 0-8 1-0 1-3 1-15 1-6 1-8 2-0 2-1 3-0 3-1 3-2 3-3 4-1 6-10 7-5 9-2 9-3 9-11 10-0 10-1 11-3'.split(' ');
+const blank=()=>({name:'',answers:{},reflections:{},section:0,cursor:0});
+let route='core', extraGroup=null, extraId=null, reflectionIndex=0;
 const key='between-us-v1';
-let state=blank(), remembering=false, page='start', peer=null, filter='All topics', search='', status='';
+let state=blank(), remembering=false, page='start', peer=null, filter='Answered topics', search='', status='';
 try{const stored=localStorage.getItem(key);if(stored){state={...blank(),...parse(JSON.parse(stored))};remembering=true}}catch{}
 const $=s=>document.querySelector(s);
 const escapeHtml=(str='')=>String(str).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const opt=(values,value,placeholder)=>'<option value="">'+placeholder+'</option>'+values.map(v=>'<option'+(v===value?' selected':'')+'>'+v+'</option>').join('');
-const choice=(label,field,values,a)=>'<label>'+label+'<select data-field="'+field+'">'+opt(values,a[field],'Choose…')+'</select></label>';
 const valid=(value,values)=>values.includes(value)?value:'';
 function parse(raw){
  if(!raw||raw.format!=='between-us'||raw.version!==1||!raw.answers||typeof raw.answers!=='object'||Array.isArray(raw.answers))throw Error('Select a Between Us response JSON file, version 1.');
@@ -47,7 +50,7 @@ function parse(raw){
  }
  const reflections={};
  reflection.forEach((_,i)=>{const v=raw.reflections?.[i];if(typeof v==='string')reflections[i]=v.slice(0,3000)});
- return {name:typeof raw.name==='string'?raw.name.slice(0,60):'',answers,reflections,section:Number.isInteger(raw.section)&&raw.section>=0&&raw.section<=sections.length?raw.section:0};
+ return {name:typeof raw.name==='string'?raw.name.slice(0,60):'',answers,reflections,cursor:Number.isInteger(raw.cursor)&&raw.cursor>=0&&raw.cursor<=core.length?raw.cursor:0,section:Number.isInteger(raw.section)&&raw.section>=0&&raw.section<=sections.length?raw.section:0};
 }
 function packet(notes=true){
  const answers={};
@@ -55,7 +58,7 @@ function packet(notes=true){
   if(a.interest==='Prefer not to answer')continue;
   answers[id]={...a,note:notes?a.note||'':''};
  }
- return {format:'between-us',version:1,date:new Date().toISOString(),name:state.name,section:state.section,answers,reflections:notes?state.reflections:{}};
+ return {format:'between-us',version:1,date:new Date().toISOString(),name:state.name,section:state.section,cursor:state.cursor,answers,reflections:notes?state.reflections:{}};
 }
 function persist(){
  if(!remembering)return;
@@ -89,14 +92,52 @@ function classify(a,b){
 const answered=s=>items.filter(({id})=>marked(s.answers[id])).length;
 const high=a=>['High','Essential'].includes(a?.priority);
 function renderStart(){
- return '<div class="panel"><h2>Make your own copy</h2><p>Use separate devices or browser profiles if you want to keep drafts apart. By default answers live in this open tab. You can opt into a saved browser draft below.</p><div class="grid gap"><label>Your name or alias<input id="name" maxlength="60" value="'+escapeHtml(state.name)+'"></label><label>Resume the same profile later<input id="own" type="file" accept=".json,application/json"></label></div><label style="display:flex;align-items:center;gap:10px"><input id="remember" type="checkbox" style="min-height:auto;width:auto;margin:0" '+(remembering?'checked':'')+'> Remember my draft in this browser</label><div class="actions gap"><button class="primary" data-view="survey">'+(answered(state)?'Continue questionnaire':'Start questionnaire')+'</button><button data-view="compare">Compare existing exports</button></div><details><summary>Privacy and sharing</summary><p>Answers are processed in your browser. Downloads are ordinary, readable files. A saved browser draft is visible to anyone using that browser profile. Only exchange exports you choose to share. The initial results export excludes free-text by default.</p><button id="clear">Clear local answers</button></details></div>';
+ return '<div class="panel"><h2>Make your own copy</h2><p>Start with 24 questions, one topic per screen. You can skip any question and explore extra topics only if you want to.</p><p>Use separate devices or browser profiles if you want to keep drafts apart. By default answers live in this open tab. You can opt into a saved browser draft below.</p><div class="grid gap"><label>Your name or alias<input id="name" maxlength="60" value="'+escapeHtml(state.name)+'"></label><label>Resume the same profile later<input id="own" type="file" accept=".json,application/json"></label></div><label style="display:flex;align-items:center;gap:10px"><input id="remember" type="checkbox" style="min-height:auto;width:auto;margin:0" '+(remembering?'checked':'')+'> Remember my draft in this browser</label><div class="actions gap"><button class="primary" data-view="survey">'+(state.cursor?'Continue questionnaire':'Start questionnaire')+'</button><button data-view="compare">Compare existing exports</button></div><details><summary>Privacy and sharing</summary><p>Answers are processed in your browser. Downloads are ordinary, readable files. A saved browser draft is visible to anyone using that browser profile. Only exchange exports you choose to share. The initial results export excludes free-text by default.</p><button id="clear">Clear local answers</button></details></div>';
+}
+function options(legend,field,values,a){
+ return '<fieldset><legend>'+legend+'</legend><div class="choices">'+values.map(value=>
+  '<label><input type="radio" name="'+field+'" data-field="'+field+'" value="'+escapeHtml(value)+'" '+(a[field]===value?'checked':'')+'>'+escapeHtml(value)+'</label>'
+ ).join('')+'</div></fieldset>';
+}
+function questionCard(id,caption,nav){
+ const item=byId.get(id);
+ const a=state.answers[id]||{};
+ const section=sections[Number(id.split('-')[0])];
+ return '<div class="panel wizard" data-id="'+id+'"><div class="eyebrow">'+caption+'</div><h2 id="section-title" tabindex="-1">'+item.label+'</h2>'+
+  (section.help?'<p>'+section.help+'</p>':'')+
+  (route==='core'?'<progress aria-label="Question position" max="'+core.length+'" value="'+(state.cursor+1)+'"></progress>':'')+
+  options('How do you feel about this?','interest',interest,a)+
+  '<details '+(a.history||a.priority||a.note?'open':'')+'><summary>Experience, importance or notes</summary>'+
+  options('Have you explored it?','history',history,a)+options('How important is it?','priority',priority,a)+
+  '<label>Conditions or notes<textarea data-field="note" maxlength="3000">'+escapeHtml(a.note)+'</textarea></label></details>'+
+  '<div class="actions gap">'+nav+'</div></div>';
 }
 function renderSurvey(){
- const s=sections[state.section];
- return '<div class="panel"><div class="eyebrow">Questionnaire</div><h2 id="section-title" tabindex="-1">'+(s?.name||'In your own words')+'</h2><p id="count">'+answered(state)+' of '+items.length+' topics answered</p><progress aria-label="Topics answered" id="progress" max="'+items.length+'" value="'+answered(state)+'"></progress><label class="gap">Jump to section<select id="jump">'+[...sections.map(x=>x.name),'In your own words'].map((name,i)=>'<option value="'+i+'" '+(i===state.section?'selected':'')+'>'+name+'</option>').join('')+'</select></label><p>'+(s?.help|| (s?'Answer only what you want to. Experience and current interest are separate. Add conditions, preferred roles or context in notes.':'Use these optional prompts for anything the checklist missed.'))+'</p>'+
- (s?s.items.map(({id,label})=>{const a=state.answers[id]||{};return '<article data-id="'+id+'"><h3>'+label+'</h3><div class="grid">'+choice('Interest or limit','interest',interest,a)+choice('Experience','history',history,a)+choice('Importance','priority',priority,a)+'</div><details '+(a.note?'open':'')+'><summary>Conditions or notes</summary><label class="sr">Notes for '+label+'</label><textarea aria-label="Notes for '+label+'" data-field="note" maxlength="3000" placeholder="For example, only in private or only with a clear pause signal.">'+escapeHtml(a.note)+'</textarea></details></article>'}).join(''):
- reflection.map((q,i)=>'<label class="gap">'+q+'<textarea maxlength="3000" data-reflection="'+i+'">'+escapeHtml(state.reflections[i])+'</textarea></label>').join(''))+
- '<div class="actions gap"><button data-step="-1" '+(!state.section?'disabled':'')+'>Previous section</button>'+(s?'<button class="primary" data-step="1">Next section</button>':'<button class="primary" data-view="review">See my results</button>')+'</div></div>';
+ const results='<button data-view="review">My results</button>';
+ const extra='<button data-route="extras">Explore optional topics</button>';
+ const written='<button data-route="reflection">In your own words</button>';
+ if(route==='reflection'){
+  return '<div class="panel wizard"><div class="eyebrow">Optional reflection '+(reflectionIndex+1)+' of '+reflection.length+'</div><h2 id="section-title" tabindex="-1">'+reflection[reflectionIndex]+'</h2><label>Your answer<textarea maxlength="3000" data-reflection="'+reflectionIndex+'">'+escapeHtml(state.reflections[reflectionIndex])+'</textarea></label><div class="actions gap">'+
+   (reflectionIndex?'<button data-ref-step="-1">Back</button>':'')+
+   (reflectionIndex<reflection.length-1?'<button class="primary" data-ref-step="1">Next</button>':'')+results+'</div></div>';
+ }
+ if(route==='extras'){
+  if(extraId)return questionCard(extraId,'Optional topic','<button data-bank>Back to topics</button>'+results);
+  if(extraGroup!==null)return '<div class="panel wizard bank"><h2 id="section-title" tabindex="-1">'+sections[extraGroup].name+'</h2><button data-bank>Back to categories</button><div class="stack">'+sections[extraGroup].items.filter(x=>!core.includes(x.id)).map(x=>'<button data-topic="'+x.id+'">'+x.label+(marked(state.answers[x.id])?' ✓':'')+'</button>').join('')+'</div></div>';
+  return '<div class="panel wizard bank"><h2 id="section-title" tabindex="-1">Optional topics</h2><p>Choose a category, then pick a topic to answer.</p><div class="stack">'+sections.map((section,i)=>'<button data-group="'+i+'">'+section.name+'</button>').join('')+'</div><div class="actions">'+written+'<button data-route="core">Back to core questions</button>'+results+'</div></div>';
+ }
+ if(state.cursor===core.length){
+  const count=core.filter(id=>marked(state.answers[id])).length;
+  return '<div class="panel wizard"><h2 id="section-title" tabindex="-1">Core questions complete</h2><p>You answered '+count+' of '+core.length+' topics.</p><div class="actions"><button class="primary" data-view="review">See my results</button>'+extra+written+'<button data-step="-1">Back</button></div></div>';
+ }
+ const id=core[state.cursor];
+ const caption='Question '+(state.cursor+1)+' of '+core.length;
+ return questionCard(id,caption,
+  (state.cursor?'<button data-step="-1">Back</button>':'')+
+  '<button class="primary" data-step="1" id="next-question">'+nextLabel(id)+'</button>'+results)+'<div class="actions wizard">'+extra+written+'</div>';
+}
+function nextLabel(id){
+ return state.answers[id]?.interest?'Next':'Skip for now';
 }
 function summary(s){
  const a=Object.values(s.answers).filter(marked);
@@ -146,7 +187,7 @@ function compareRows(){
  }));
 }
 function compared(rows){
- const matches=rows.filter(r=>(filter==='All topics'||r.group===filter)&&(!search||(r.label+' '+r.section).toLowerCase().includes(search.toLowerCase())));
+ const matches=rows.filter(r=>(filter==='All topics'||(filter==='Answered topics'&&(marked(r.a)||marked(r.b)))||r.group===filter)&&(!search||(r.label+' '+r.section).toLowerCase().includes(search.toLowerCase())));
  const orders=Object.keys(rules);
  matches.sort((a,b)=>orders.indexOf(a.group)-orders.indexOf(b.group)||Number(high(b.a)||high(b.b))-Number(high(a.a)||high(a.b)));
  return matches.map(r=>'<article><small>'+r.section+'</small><h3>'+r.label+'</h3><span class="pill '+(['Hard boundary','No / dislike'].includes(r.group)?'boundary':'')+'">'+r.group+'</span><p>'+rules[r.group]+'</p><div class="grid"><div><strong class="wrap">'+escapeHtml(state.name||'My answers')+'</strong><br>'+formatted(r.a)+'</div><div><strong class="wrap">'+escapeHtml(peer.name||'Partner')+'</strong><br>'+formatted(r.b)+'</div></div></article>').join('')||'<p>No topics match this filter.</p>';
@@ -162,7 +203,7 @@ function renderCompare(){
  (shortlist.length?'<p>Shared favourites to discuss first: '+shortlist.map(r=>r.label).join(', ')+'.</p>':'')+
  (matchedNew.length?'<p>Potential firsts together: '+matchedNew.slice(0,5).map(r=>r.label).join(', ')+'.</p>':'')+
  (needs?'<p>'+needs+' topics pair an active interest with a no or hard limit. Keep those off the table.</p>':'')+
- '<p>Matching roles are paired where possible, such as giving instructions with receiving them. Each new activity still needs a current, freely given yes.</p><div class="grid controls gap"><label>Filter results<select id="filter"><option>All topics</option>'+groups.map(g=>'<option '+(g===filter?'selected':'')+'>'+g+'</option>').join('')+'</select></label><label>Search topics<input id="search" value="'+escapeHtml(search)+'"></label></div><div class="actions controls gap"><button id="compareExport">Export full comparison (CSV)</button><button id="print">Print or save filtered PDF</button><button id="removePeer">Remove partner responses</button></div><div id="rows">'+compared(rows)+'</div>'+
+ '<p>Matching roles are paired where possible, such as giving instructions with receiving them. Each new activity still needs a current, freely given yes.</p><div class="grid controls gap"><div class="bank" aria-label="Filter results">'+['Answered topics','All topics',...groups].map(g=>'<button data-filter="'+g+'" aria-pressed="'+(g===filter)+'">'+g+'</button>').join('')+'</div><label>Search topics<input id="search" value="'+escapeHtml(search)+'"></label></div><div class="actions controls gap"><button id="compareExport">Export full comparison (CSV)</button><button id="print">Print or save filtered PDF</button><button id="removePeer">Remove partner responses</button></div><div id="rows">'+compared(rows)+'</div>'+
  (reflections(state)||reflections(peer)?'<details><summary>Shared free-text reflections</summary><h3 class="wrap">'+escapeHtml(state.name||'My answers')+'</h3>'+reflections(state)+'<h3 class="wrap">'+escapeHtml(peer.name||'Partner')+'</h3>'+reflections(peer)+'</details>':''):'')+'</div>';
 }
 function render(){
@@ -219,14 +260,25 @@ function csv(){
 function focusSection(){const title=$('#section-title');title?.focus();title?.scrollIntoView({block:'start'})}
 document.addEventListener('click',event=>{
  const b=event.target.closest('button');if(!b)return;
- if(b.dataset.view){page=b.dataset.view;status='';render();if(page==='survey')focusSection();return}
- if(b.dataset.step){state.section=Number(state.section)+Number(b.dataset.step);persist();render();focusSection();return}
+ if(b.dataset.view){if(page==='start'&&b.dataset.view==='survey')route='core';page=b.dataset.view;status='';render();if(page==='survey')focusSection();return}
+ if(b.dataset.step){state.cursor+=Number(b.dataset.step);persist();render();focusSection();return}
+ if(b.dataset.route){route=b.dataset.route;extraId=null;extraGroup=null;render();focusSection();return}
+ if(b.dataset.group!==undefined){extraGroup=Number(b.dataset.group);render();focusSection();return}
+ if(b.dataset.topic){extraId=b.dataset.topic;render();focusSection();return}
+ if(b.hasAttribute('data-bank')){if(extraId)extraId=null;else extraGroup=null;render();focusSection();return}
+ if(b.dataset.refStep){reflectionIndex+=Number(b.dataset.refStep);render();focusSection();return}
+ if(b.dataset.filter){
+  filter=b.dataset.filter;
+  document.querySelectorAll('[data-filter]').forEach(option=>option.setAttribute('aria-pressed',String(option===b)));
+  $('#rows').innerHTML=compared(compareRows());
+  return;
+ }
  if(b.id==='export'){download('between-us-responses.json','application/json',JSON.stringify(packet($('#notes').checked),null,2));}
  if(b.id==='compareExport'){download('between-us-comparison.csv','text/csv;charset=utf-8',csv());}
  if(b.id==='print')window.print();
- if(b.id==='removePeer'){peer=null;filter='All topics';search='';render()}
+ if(b.id==='removePeer'){peer=null;filter='Answered topics';search='';render()}
  if(b.id==='clear'&&confirm('Clear the answers and draft from this browser? Your downloaded exports will still exist.')){
-  try{localStorage.removeItem(key)}catch{}remembering=false;state=blank();peer=null;filter='All topics';search='';status='Local answers cleared.';render();
+  try{localStorage.removeItem(key)}catch{}remembering=false;state=blank();route='core';peer=null;filter='Answered topics';search='';status='Local answers cleared.';render();
  }
 });
 document.addEventListener('input',event=>{
@@ -235,16 +287,14 @@ document.addEventListener('input',event=>{
  if(el.id==='search'){search=el.value;$('#rows').innerHTML=compared(compareRows())}
  if(el.dataset.reflection!==undefined){state.reflections[el.dataset.reflection]=el.value;persist()}
  if(el.dataset.field){
-  const id=el.closest('article').dataset.id;
+  const id=el.closest('[data-id]').dataset.id;
   (state.answers[id]??={})[el.dataset.field]=el.value;
   persist();
-  $('#progress').value=answered(state);$('#count').textContent=answered(state)+' of '+items.length+' topics answered';
+  const next=$('#next-question');if(next)next.textContent=nextLabel(id);
  }
 });
 document.addEventListener('change',async event=>{
  const el=event.target;
- if(el.id==='jump'){state.section=Number(el.value);persist();render();focusSection()}
- if(el.id==='filter'){filter=el.value;$('#rows').innerHTML=compared(compareRows())}
  if(el.id==='remember'){
   remembering=el.checked;
   if(remembering){persist();el.checked=remembering}
@@ -257,7 +307,7 @@ document.addEventListener('change',async event=>{
    if(el.id==='own'){
     if((Object.keys(state.answers).length||Object.keys(state.reflections).length)&&!confirm('Replace your current answers with this file?')){el.value='';return}
     state=profile;persist();
-   }else{peer=profile;filter='All topics';search=''}
+   }else{peer=profile;filter='Answered topics';search=''}
    status='Responses loaded.';render();
   }catch(error){el.value='';message(error instanceof SyntaxError?'This file is not valid JSON.':error.message)}
  }

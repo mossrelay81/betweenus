@@ -99,11 +99,230 @@ function options(legend,field,values,a){
   '<label><input type="radio" name="'+field+'" data-field="'+field+'" value="'+escapeHtml(value)+'" '+(a[field]===value?'checked':'')+'>'+escapeHtml(value)+'</label>'
  ).join('')+'</div></fieldset>';
 }
+const explanations = [
+ [
+  "Time together, a hug or a kiss that either of you can enjoy without it being an invitation to go further.",
+  "Your partner shows you they want closeness or intimacy and makes the first move.",
+  "You make the first move and let your partner know you want closeness or intimacy.",
+  "You and your partner agree a time in advance, while leaving room for either of you to change your mind.",
+  "Either of you starts something in the moment when it feels welcome.",
+  "The two of you exchange playful messages, compliments or looks as you go about your day. Say if you prefer to start or receive them.",
+  "One of you asks plainly if the other would like some closeness. Say whether you prefer asking, being asked or both.",
+  "One of you hints through a look, phrase or gesture. Talk about which cues you both recognise and how you check what they mean.",
+  "You and your partner let anticipation build through attention, flirting or time together before deciding whether to go further.",
+  "When either of you declines, both can keep the warmth between you with reassurance or affection if wanted.",
+  "On a tired or overloaded day, you and your partner offer connection that takes little effort, such as sitting together quietly.",
+  "Each of you has time alone without needing to justify it or share what you did."
+ ],
+ [
+  "Hollie takes the lead in small, agreed moments at home, and Ben chooses to follow. Think about which moments would feel natural for each of you.",
+  "Hollie and Ben sometimes swap who takes the lead. Think about when you would enjoy leading yourself or letting your partner lead.",
+  "You both agree that a specific choice can be made by Hollie or by Ben. Name the kind of decision and who would make it.",
+  "You do a thoughtful, agreed task for your partner, such as getting something ready for them. Think about what you would enjoy doing freely.",
+  "You and your partner share a small repeated gesture, such as a greeting, a check-in or a moment of appreciation.",
+  "One of you uses a private title for the other. Say who would use it, what words feel natural and when it would fit.",
+  "You and your partner share a cue that means something to you both while staying unremarkable to others.",
+  "Your partner offers guidance about what you wear, or you offer it to them. Say which direction you mean and how freely the choice stays yours.",
+  "Hollie notices something Ben did and tells him she liked it. Think about which words and situations would make that feel sincere.",
+  "You and your partner agree small playful rules. Say who would suggest them and when you would want them to apply.",
+  "You agree beforehand how to handle a missed playful agreement. Say who would prompt a reset and which responses would still feel welcome.",
+  "You and your partner agree which of you leads during a specific window, then explicitly end the arrangement.",
+  "You and your partner agree that certain decisions or rituals carry across days. Name who leads, where the agreement applies and how you pause it.",
+  "When you and your partner disagree, you speak as equals and set playful authority aside.",
+  "You choose or guide part of a date with your partner. Say what you would enjoy deciding.",
+  "Your partner does a thoughtful task for you. Think about what would make it feel like care or affection to receive."
+ ],
+ [
+  "You lead a pre-agreed scene with your partner. Think about whether you enjoy setting the pace, giving cues and checking in.",
+  "Your partner leads a pre-agreed scene and you follow. Think about what makes their lead comfortable and appealing to you.",
+  "You and your partner change who leads within the same agreed scene. Say what would make the handover clear.",
+  "You tell your partner what you would like them to do within the agreed limits. Think about which tone feels natural to you.",
+  "Your partner gives you a clear cue or instruction within agreed limits. Think about which wording and situations feel good to you.",
+  "In an agreed playful context, Hollie invites Ben to wait for a cue or ask permission. Think about how much build-up each of you enjoys.",
+  "One of you uses deliberately affirming praise in the dynamic. Say whether you like giving it, receiving it or both.",
+  "One of you acts playfully defiant and the other responds within agreed boundaries. Say which part you would enjoy.",
+  "You or your partner expresses focused admiration or devotion. Say who gives or receives it and which gestures feel affectionate.",
+  "One of you expresses submission through freely chosen service. Say whose role you mean and what kinds of tasks feel enjoyable.",
+  "You and your partner make sensation the focus of an agreed scene. Say whether you prefer giving or receiving and which sensations appeal.",
+  "You and your partner follow an agreed opening, pattern or closing to make the scene feel intentional.",
+  "You and your partner consider a fictional resistance theme with fully agreed roles and explicit ways to stop. You can mark it fantasy only or off limits.",
+  "You and your partner consider an agreed fictional consequence within roleplay. Say whose role you mean and what tone appeals.",
+  "You and your partner temporarily take each other’s usual roles. Think about what you would want to be different.",
+  "You and your partner engage in agreed roleplay centred on connection, ritual or sensation without sexual contact."
+ ],
+ [
+  "You gently tease your partner in a way they would welcome. Think about which words, timing or looks would feel natural for you.",
+  "Your partner gently teases you. Think about the subjects and tones that feel affectionate or exciting to receive.",
+  "You use agreed teasing that deliberately makes your partner feel a little exposed or flustered. Think about which words you would feel comfortable saying.",
+  "Your partner uses agreed teasing that makes you feel a little exposed or flustered. Think about where the line is between enjoyable embarrassment and genuinely feeling hurt.",
+  "One of you calls the other an affectionate or playful name. Say who would use it and which names fit.",
+  "You and your partner use more direct adult language. Say whether you prefer saying it, hearing it or both.",
+  "You or your partner adopts deliberately formal wording in an agreed moment. Say which direction you mean.",
+  "Hollie leads with warmth, such as a calm cue or an affectionate request Ben can choose to follow.",
+  "Hollie uses a firmer tone with Ben in an agreed moment. Think about what keeps it playful and where it stops feeling welcome.",
+  "Your partner gives you unexpected attention or asks you to respond on the spot in an agreed context. Think about how much notice you would prefer.",
+  "You or your partner gives a compliment about appearance or physical features. Say what you enjoy saying or hearing.",
+  "One of you teases the other about appearance within explicitly agreed limits. Say whose body the comments would be about and where the line is.",
+  "After an agreed scene, you and your partner offer private words of appreciation or reassurance. Say what you want to hear or give.",
+  "You and your partner explicitly agree which phrases, topics and personal insecurities are off limits. Use a note if the limit depends on who says it or when."
+ ],
+ [
+  "One of you wears nylons or tights as part of an outfit or intimate moment. Say whether you mean wearing them, seeing them on your partner or both.",
+  "One of you wears stockings or hold-ups. Think about whether you mean wearing them yourself, seeing them on your partner or enjoying the texture.",
+  "One of you wears heels or platform boots as part of the look. Say who wears them and what appeals to you.",
+  "One of you wears lingerie. Say whether dressing up yourself, seeing your partner dressed up or both is the appeal.",
+  "You or your partner wears clothing with a leather or latex look. Think about whether the visual style, the material or both appeal.",
+  "One of you wears a costume or uniform to set a mood. Say who you picture wearing it and what kind.",
+  "You or your partner dresses as a fictional character or uses a character-inspired look. Add whose outfit and what style.",
+  "Your partner chooses to dress up for you. Think about which looks make it feel meaningful to receive that attention.",
+  "You choose to dress up for your partner. Think about which looks you would enjoy wearing yourself.",
+  "One of you uses make-up or styling as part of the mood. Say whether you enjoy doing it, seeing it on your partner or both.",
+  "You or your partner wears or touches a particular fabric. Name the textures you like and any sensory limits.",
+  "One of you wears a mask as part of a look or character. Say who wears it and what would keep it comfortable.",
+  "One of you wears a collar or jewellery with a private meaning. Say who wears it and what it would mean to you.",
+  "One of you wears gloves as part of an outfit or for the texture. Say who wears them and what you like about them.",
+  "You or your partner wears an ordinary-looking item that has a private meaning about your roles."
+ ],
+ [
+  "You and your partner use gentle touch. Say if you prefer giving it, receiving it or both, and where it feels welcome.",
+  "You and your partner use a firmer touch. Say whether you mean giving or receiving and what intensity feels comfortable.",
+  "One of you wears a blindfold in an agreed context. Say whether you mean wearing it or being the partner who can see.",
+  "One of you has reduced access to sound in an agreed context. Say who you picture and how you would keep communication clear.",
+  "One of you wears cuffs or soft restraints by agreement. Say whether you mean wearing them or being the partner in charge of them.",
+  "One of you is restrained with rope in an agreed context. Say whether you picture being restrained or taking the lead.",
+  "You would be the person giving impact in a mutually agreed scene. Think about your comfort with that role.",
+  "Your partner would give impact and you would receive it. Think about your boundaries around intensity, location and marks.",
+  "You and your partner explore contrasting sensations, such as different textures. Say which contrasts appeal and who receives them.",
+  "You and your partner consider warm or cool sensations. Say whether you picture giving or receiving and any sensory limits.",
+  "You or your partner gives or receives light scratching or biting. Say which direction you mean and what is off limits.",
+  "One of you might have a visible mark afterwards. Say whose body you mean and whether location or visibility changes your answer.",
+  "You and your partner consider stronger sensations. Say whether you picture giving or receiving and what feels too intense.",
+  "You or your partner imagines being unable to move freely. Say which role you picture and if this stays a fantasy.",
+  "Record any limit around breath or neck pressure, for yourself, your partner or both. This prompt is for recording boundaries only."
+ ],
+ [
+  "You and your partner spend time kissing. Think about what kinds of kissing and settings you enjoy.",
+  "You are the person giving oral sex to your partner. Record how you feel about giving it.",
+  "Your partner gives oral sex to you. Record how you feel about receiving it.",
+  "You or your partner uses hands for sexual touch. Say whether you like giving, receiving or both.",
+  "You and your partner consider vaginal penetration. Say what role or conditions your answer refers to, if relevant.",
+  "You or your partner considers anal play or penetration. Specify your role and which kinds, if any, you mean.",
+  "You and your partner use toys together. Say who uses or receives them and what kind you have in mind.",
+  "One of you controls a toy the other uses. Say whether you would prefer to control it or have your partner take that role.",
+  "You and your partner each touch yourselves while together. Think about what kind of shared attention you would enjoy.",
+  "You are watching and your partner is the one touching themselves. Think about how you feel about being the watcher.",
+  "Hollie guides the timing in an agreed intimate moment and Ben follows her cues. Consider delays, pauses and whether an agreed finish matters to you.",
+  "You and your partner spend longer building anticipation during intimacy. Think about what pace each of you would enjoy.",
+  "You and your partner consider a rougher tone or intensity. Say what that means to you and whether you mean giving or receiving.",
+  "You and your partner focus on gentleness during intimacy. Think about the pace, words or touch that would feel good.",
+  "You and your partner spend intimate time together without an expectation of orgasm for either person.",
+  "You and your partner change who directs the pace during intimacy. Say when and in which direction the switch appeals.",
+  "You and your partner agree which barriers you would want for specific activities, including when any boundary applies.",
+  "You and your partner make room to talk through contraception or plans around pregnancy before deciding what you both want."
+ ],
+ [
+  "You and your partner pretend to meet as strangers. Say if you have a role or setting in mind.",
+  "You and your partner play fictional characters. Say which roles you each would play and whether you want to act it out.",
+  "You and your partner imagine a fictional authority dynamic. Say who holds authority and which settings appeal or are off limits.",
+  "You and your partner play at being rivals. Think about what would keep the competition light and repartee welcome.",
+  "Your partner chooses an outfit to surprise you. Think about the kinds of surprises you would enjoy receiving.",
+  "Hollie teases and delays an agreed moment of intimacy while Ben enjoys the anticipation. Think about how long feels fun and what ending you each picture.",
+  "You and your partner consider a fictional theme of being treated as an object. Say who plays which role and whether it stays imaginary.",
+  "You and your partner consider a fictional pet and handler dynamic. Note which role, tone and level of commitment appeal.",
+  "In fantasy, you are the person being watched. Think about who you imagine observing and whether it stays entirely imaginary.",
+  "In fantasy, you are watching. Think about who you imagine observing and whether it stays entirely imaginary.",
+  "You write down a fantasy to share with your partner. You decide how much to disclose and can ask them to read it privately.",
+  "Your partner describes their fantasy to you. Think about what you would feel comfortable hearing or reading.",
+  "You and your partner agree a scene in advance, including which role each person takes and how much is planned.",
+  "You or your partner enjoys a fantasy that you want to leave imaginary. Note whether talking about it would be welcome.",
+  "You and your partner make up a fictional scenario together. Think about how you would like to contribute and whether it stays a story."
+ ],
+ [
+  "One of you takes or appears in private photos by agreement. Specify who would take, appear in or keep them.",
+  "One of you records or appears in private video by agreement. Say who would record, appear in or keep it.",
+  "You and your partner exchange intimate messages. Say whether you prefer sending, receiving or both, and what timing feels welcome.",
+  "You and your partner share intimacy while apart. Say what kind of communication feels comfortable and what boundaries apply.",
+  "You and your partner agree who can keep private media, where it can be stored and when you would want it deleted.",
+  "You and your partner use a private look or gesture away from home. Think about what can remain discreet and ordinary to others.",
+  "You or your partner is interested in attending an adult community event. Say whether you picture going together or separately.",
+  "You or your partner talks to friends about the dynamic. Think about what each of you would be comfortable sharing.",
+  "You and your partner consider watching adult material together. Say what kind and whose choice it would be.",
+  "You and your partner consider talking openly about attraction to someone else. Say what you would be comfortable hearing or sharing.",
+  "You or your partner imagines a fantasy involving another consenting adult. Say who is involved in the fantasy and whether you would want to share it.",
+  "You and your partner consider real-life involvement of another consenting adult. Say which arrangements, if any, you would be willing to discuss.",
+  "You and your partner agree what exclusivity means to each of you, including behaviour online or in person.",
+  "You and your partner agree which private activities and objects belong away from shared family spaces and routines."
+ ],
+ [
+  "The person proposing an activity asks and waits for a freely given yes from the other person.",
+  "Either of you checks with the other before introducing something new, even when similar things have been welcome before.",
+  "Either of you can say an agreed word that means pause or stop. Pick wording that feels easy to say and recognise.",
+  "Either of you can use a gesture or other signal to pause or stop when speaking is hard. Agree what the other should look for.",
+  "Either of you can ask whether the other is comfortable during a scene, and both respond to what they hear or notice.",
+  "You and your partner discuss plans and limits in writing when it helps you both think clearly.",
+  "Either of you can stop the activity without having to explain or defend the choice.",
+  "You and your partner pause roleplay during a real disagreement so either of you can speak plainly and be heard.",
+  "Either of you pauses when the other is too impaired to understand, choose freely or communicate clearly.",
+  "Neither of you raises the intensity or changes the activity without checking with the other first.",
+  "You and your partner set a limit on visible marks. Say whether it applies to you, your partner or both, and which areas matter.",
+  "Each of you names any words, insults or body comments you want the other to avoid. Add context if the limit varies by situation.",
+  "Each of you tells the other what intensity is acceptable and what needs to stay off limits.",
+  "Each of you identifies your own health, sensory or accessibility limits and what you want the other to know.",
+  "You and your partner agree precautions relevant to either of you before deciding what activities to share.",
+  "Each person whose image, recording or message is involved gives current permission before it is shared."
+ ],
+ [
+  "You and your partner spend quiet time close together afterwards if you both want it. Say what kind of closeness you would find comforting.",
+  "You may want some time alone afterwards. Say how much space helps and whether you would like your partner to check in later.",
+  "You or your partner offers practical comforts after an intense moment. Say what you would appreciate receiving or giving.",
+  "You and your partner offer affirming words afterwards. Say which reassurance you would want to hear or give.",
+  "You or your partner uses gentle humour to reconnect afterwards, when it feels welcome to you both.",
+  "Either of you checks how the other feels the next day, once there has been time to think.",
+  "You and your partner exchange written feedback afterwards. Say how soon and how much detail would help.",
+  "You and your partner make room to discuss something that felt wrong or uncomfortable and agree what to change.",
+  "You and your partner use a clear agreed signal or ritual to mark the end of the scene.",
+  "Either of you pauses and responds to signs the other has frozen or shut down. Describe what support you would want your partner to offer.",
+  "Either of you can ask to set the dynamic aside when tired, unwell, stressed or overloaded.",
+  "You and your partner revisit agreements when either person's needs, health or capacity changes.",
+  "If either person crosses a boundary, you agree how to stop, listen, acknowledge the impact and make changes before resuming."
+ ],
+ [
+  "Think about what romantic gestures you would like to give your partner or receive from them.",
+  "Think about the day-to-day affection you would want from your partner or enjoy offering them.",
+  "Hollie takes the lead more confidently in agreed moments. Think about where that would feel good to each of you.",
+  "Your partner shows that they actively want you, through words, attention or choosing to initiate. Think about what would make you feel desired.",
+  "Your partner notices and values what you do. Think about how you would like them to show it, or how you want to show it to them.",
+  "You and your partner try changing the pace, atmosphere or routine. Say what you would enjoy changing.",
+  "You and your partner make plans or signals clearer so there is less uncertainty for either of you.",
+  "You and your partner leave extra time for anticipation before deciding whether to act on it.",
+  "You and your partner set aside enough time to talk before deciding what you both want.",
+  "You and your partner keep more intense moments occasional. Say what frequency and when you would want to pause.",
+  "You and your partner begin with something you already know you both enjoy.",
+  "You and your partner agree to try one change at a time so each can say how it felt.",
+  "You and your partner set aside time occasionally to talk about what feels good, what needs changing and what either person wants to pause.",
+  "Both of you can let the dynamic drop away on a busy day and pick it up again when you feel ready."
+ ]
+];
+const reflectionHelp=[
+ 'Think about an interaction you would like your partner to initiate, or something you would like to offer them more often.',
+ 'Write down the limits you want your partner to understand. Say whether a limit applies to you, your partner or both.',
+ 'Describe what you would need from your partner, from the setting or from the timing to say yes freely.',
+ 'Describe only what you would want your partner to know. Include whose role you imagine and whether talking is as far as you want to go.',
+ 'Tell your partner which actions or words help you feel desired and which make it easier to ask for a pause.',
+ 'Name one thing you would like the two of you to start, do again or leave behind. Say what your own role would be.'
+];
+function answeringAs(){
+ const name=state.name.trim();
+ const partner=new Map([['ben','Hollie'],['hollie','Ben']]).get(name.toLowerCase());
+ return '<p class="gap"><strong>'+escapeHtml(name||'You')+' answering</strong> · '+(partner?'Your partner is '+partner:'“You” means the person filling this in.')+'</p>';
+}
 function questionCard(id,caption,nav){
  const item=byId.get(id);
  const a=state.answers[id]||{};
- const section=sections[Number(id.split('-')[0])];
+ const [sectionIndex,itemIndex]=id.split('-').map(Number);
+ const section=sections[sectionIndex];
  return '<div class="panel wizard" data-id="'+id+'"><div class="eyebrow">'+caption+'</div><h2 id="section-title" tabindex="-1">'+item.label+'</h2>'+
+  answeringAs()+'<p>'+escapeHtml(explanations[sectionIndex][itemIndex])+'</p>'+
   (section.help?'<p>'+section.help+'</p>':'')+
   (route==='core'?'<progress aria-label="Question position" max="'+core.length+'" value="'+(state.cursor+1)+'"></progress>':'')+
   options('How do you feel about this?','interest',interest,a)+
@@ -117,7 +336,7 @@ function renderSurvey(){
  const extra='<button data-route="extras">Explore optional topics</button>';
  const written='<button data-route="reflection">In your own words</button>';
  if(route==='reflection'){
-  return '<div class="panel wizard"><div class="eyebrow">Optional reflection '+(reflectionIndex+1)+' of '+reflection.length+'</div><h2 id="section-title" tabindex="-1">'+reflection[reflectionIndex]+'</h2><label>Your answer<textarea maxlength="3000" data-reflection="'+reflectionIndex+'">'+escapeHtml(state.reflections[reflectionIndex])+'</textarea></label><div class="actions gap">'+
+  return '<div class="panel wizard"><div class="eyebrow">Optional reflection '+(reflectionIndex+1)+' of '+reflection.length+'</div><h2 id="section-title" tabindex="-1">'+reflection[reflectionIndex]+'</h2>'+answeringAs()+'<p>'+escapeHtml(reflectionHelp[reflectionIndex])+'</p><label>Your answer<textarea maxlength="3000" data-reflection="'+reflectionIndex+'">'+escapeHtml(state.reflections[reflectionIndex])+'</textarea></label><div class="actions gap">'+
    (reflectionIndex?'<button data-ref-step="-1">Back</button>':'')+
    (reflectionIndex<reflection.length-1?'<button class="primary" data-ref-step="1">Next</button>':'')+results+'</div></div>';
  }
